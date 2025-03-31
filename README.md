@@ -192,11 +192,11 @@
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
-				'00DKd000005bxP4',
-				'DemoAgent',
-				'https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001',
+				'00DHs00000EdyPr',
+				'Demo_External_Site_Check_Embedded',
+				'https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403',
 				{
-					scrt2URL: 'https://bn1731060299181.my.salesforce-scrt.com'
+					scrt2URL: 'https://bn1730704758553.my.salesforce-scrt.com'
 				}
 			);
 		} catch (err) {
@@ -204,8 +204,11 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
+
+</body>
+</html>
 
 <html lang="en">
 <head>
@@ -285,26 +288,39 @@
             document.getElementById('welcome-container').classList.add('hidden');
             document.getElementById('login-container').classList.remove('hidden');
         }
-   <script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
+    </script>
+	<!-- Chatbot Toggle Button -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
 
-			embeddedservice_bootstrap.init(
-				'00DKd000005bxP4',
-				'DemoAgent',
-				'https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001',
-				{
-					scrt2URL: 'https://bn1731060299181.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-</script>
-<script type='text/javascript' src='https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+    <!-- Chatbot Widget -->
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header" onclick="toggleChatbot()">AI Chatbot</div>
+        <div class="chatbot-body">
+            <script type='text/javascript'>
+                function initEmbeddedMessaging() {
+                    try {
+                        embeddedservice_bootstrap.settings.language = 'en_US'; 
+                        embeddedservice_bootstrap.init(
+                            '00DHs00000EdyPr', 
+                            'Demo_External_Site_Check_Embedded', 
+                            'https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403', 
+                            { scrt2URL: 'https://bn1730704758553.my.salesforce-scrt.com' }
+                        );
+                    } catch (err) {
+                        console.error('Error loading Embedded Messaging: ', err);
+                    }
+                };
+            </script>
+            <script type='text/javascript' src='https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+        </div>
+    </div>
 
+    <script>
+        function toggleChatbot() {
+            var chatbot = document.getElementById("chatbot");
+            chatbot.style.display = chatbot.style.display === "block" ? "none" : "block";
+        }
+    </script>
 
 
 //Checking the userId is passing or not
