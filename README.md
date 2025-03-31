@@ -192,11 +192,11 @@
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
 			embeddedservice_bootstrap.init(
-				'00DHs00000EdyPr',
-				'Demo_External_Site_Check_Embedded',
-				'https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403',
+				'00DKd000005bxP4',
+				'DemoAgent',
+				'https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001',
 				{
-					scrt2URL: 'https://bn1730704758553.my.salesforce-scrt.com'
+					scrt2URL: 'https://bn1731060299181.my.salesforce-scrt.com'
 				}
 			);
 		} catch (err) {
@@ -204,11 +204,8 @@
 		}
 	};
 </script>
-<script type='text/javascript' src='https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+<script type='text/javascript' src='https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-
-</body>
-</html>
 
 <html lang="en">
 <head>
