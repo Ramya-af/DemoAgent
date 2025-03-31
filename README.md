@@ -288,39 +288,80 @@
             document.getElementById('welcome-container').classList.add('hidden');
             document.getElementById('login-container').classList.remove('hidden');
         }
-    </script>
-	<!-- Chatbot Toggle Button -->
-    <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+   <script type='text/javascript'>
+	function initEmbeddedMessaging() {
+		try {
+			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
 
-    <!-- Chatbot Widget -->
-    <div class="chatbot-container" id="chatbot">
-        <div class="chatbot-header" onclick="toggleChatbot()">AI Chatbot</div>
-        <div class="chatbot-body">
-            <script type='text/javascript'>
-                function initEmbeddedMessaging() {
-                    try {
-                        embeddedservice_bootstrap.settings.language = 'en_US'; 
-                        embeddedservice_bootstrap.init(
-                            '00DHs00000EdyPr', 
-                            'Demo_External_Site_Check_Embedded', 
-                            'https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403', 
-                            { scrt2URL: 'https://bn1730704758553.my.salesforce-scrt.com' }
-                        );
-                    } catch (err) {
-                        console.error('Error loading Embedded Messaging: ', err);
-                    }
-                };
-            </script>
-            <script type='text/javascript' src='https://bn1730704758553.my.site.com/ESWDemoExternalSiteChe1743055477403/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-        </div>
-    </div>
+			embeddedservice_bootstrap.init(
+				'00DKd000005bxP4',
+				'DemoAgent',
+				'https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001',
+				{
+					scrt2URL: 'https://bn1731060299181.my.salesforce-scrt.com'
+				}
+			);
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	};
+</script>
+<script type='text/javascript' src='https://bn1731060299181.my.site.com/ESWDemoAgent1743412590001/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
-    <script>
-        function toggleChatbot() {
-            var chatbot = document.getElementById("chatbot");
-            chatbot.style.display = chatbot.style.display === "block" ? "none" : "block";
+
+
+//Checking the userId is passing or not
+
+window.addEventListener("onEmbeddedMessagingReady", async () => {
+    console.log('Received the onEmbeddedMessagingReady event...');
+ 
+    let userId = null;
+ 
+    //  Try getting userId from window.userSession
+    if (window.userSession && window.userSession.userId) {
+        userId = window.userSession.userId;
+        console.log("UserId found in window.userSession:", userId);
+    }
+ 
+    //  If userId is not found, check localStorage
+    if (!userId) {
+        userId = localStorage.getItem('userId');
+        if (userId) {
+            console.log("UserId found in localStorage:", userId);
         }
-    </script>
+    }
+ 
+    //  If still not found, try fetching from an API
+    if (!userId) {
+        try {
+            let response = await fetch('https://your-external-site.com/api/getUser', {
+                method: 'GET',
+                credentials: 'include',  // Ensures cookies/session are included
+                headers: { 'Content-Type': 'application/json' }
+            });
+ 
+            if (response.ok) {
+                let data = await response.json();
+                userId = data.userId;
+                console.log("UserId retrieved from API:", userId);
+            } else {
+                console.warn("API request failed:", response.status);
+            }
+        } catch (error) {
+            console.error("Error fetching userId from API:", error);
+        }
+    }
+ 
+    //  If userId is found, set it in prechat fields
+    if (userId) {
+        console.log('Passing HiddenPrechatUserId = ' + userId);
+        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({'userId': userId});
+    } else {
+        console.warn("UserId could not be found in any source.");
+    }
+}); 
+
+
 	
 	
 </body>
